@@ -31,12 +31,26 @@ io.on('connection', function (socket) {
 const sqlite3 = require('sqlite3').verbose();
 
 // open database in memory
-let db = new sqlite3.Database('./db/bdd.db', sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database('./bdd.db', (err) => {
     if (err) {
         return console.error(err.message);
     }
     console.log('Connecté a la base bdd.db :)');
 });
+// Create table 
+let init = function () {
+    db.run("CREATE TABLE if not exists user (" +
+        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        " pseudo TEXT," +
+        ")");
+    db.run("CREATE TABLE if not exists message (" +
+        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        " pseudo TEXT," +
+        " label TEXT," +
+        " date DATE," +
+        ")");
+    console.log("table créé")
+}
 
 // close the database connection
 db.close((err) => {
