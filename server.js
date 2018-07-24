@@ -29,6 +29,7 @@ io.on('connection', function (socket) {
 
 
 const sqlite3 = require('sqlite3').verbose();
+// en haut les require de module
 
 // open database in memory
 let db = new sqlite3.Database('./bdd.db', (err) => {
@@ -37,18 +38,23 @@ let db = new sqlite3.Database('./bdd.db', (err) => {
     }
     console.log('Connecté a la base bdd.db :)');
 });
+// tu peux mettre des const
+
+
 // Create table 
 let init = function () {
     db.run("CREATE TABLE if not exists user (" +
         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
         " pseudo TEXT," +
         ")");
+    // a " pseudo TEXT," pas de virgule avant la ")"
     db.run("CREATE TABLE if not exists message (" +
         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
         " pseudo TEXT," +
         " label TEXT," +
         " date DATE," +
         ")");
+    // pareil
     console.log("table créé")
 }
 
@@ -59,6 +65,7 @@ db.close((err) => {
     }
     console.log('Close the database connection.');
 });
+// tu closes direct ta bdd ?
 
 
 
