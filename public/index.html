@@ -47,27 +47,19 @@
     <script>
         $(function () {
             var socket = io();
-            $('#wala').submit(function () {
-                socket.emit('chat message', { label: $('#m').val() });
-                $('#m').val('');
+            $('#formPseudo,#wala').submit(function () {
+                socket.emit('chat message', { label: $('#m' + '#champPseudo').val() });
+                $('#m' + '#champPseudo').val('');
                 return false;
             });
-            socket.on('chat message', function (msg) {
-                $('#messages').append($('<li>').text(msg.label));
+            socket.on('chat message', function (pseudo, msg) {
+                $('#messages').append($('<li>').text(pseudo.label + msg.label));
                 console.log(msg.label)
             });
         });
 
-        $(document).ready(function () {
-            $("#formPseudo").submit(function () {
-                var pseudo = $('#champPseudo').val();
-                $.post('db.js', { pseudo: pseudo }, function (donnees) {
 
-                })
-            }
 
-            )
-        });
 
 
 
